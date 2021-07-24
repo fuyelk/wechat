@@ -1,0 +1,24 @@
+{
+    "name": "fuyelk/wechat",
+    "description": "微信管理SDK，保持accessTOKEN最新，封装微信接口请求方式",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "fuyelk",
+            "email": "fuyelk@fuyelk.com"
+        }
+    ],
+    "require": {
+        "ext-pdo": "*",
+        "ext-mbstring": "*",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "fuyelk/db": ">=0.1.0"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "fuyelk\\wechat\\" : "src/"
+        }
+    }
+}
