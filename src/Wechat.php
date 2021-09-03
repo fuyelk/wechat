@@ -268,8 +268,6 @@ class Wechat
     }
 
 
-
-
     // TODO 下面的方法放拷贝到公网可以访问的接口中
 
 
@@ -332,6 +330,13 @@ class Wechat
                 $this->error($e->getMessage());
             }
 
+            // {
+            //  "access_token":"ACCESS_TOKEN",
+            //  "expires_in":7200,
+            //  "refresh_token":"REFRESH_TOKEN",
+            //  "openid":"OPENID",
+            //  "scope":"SCOPE"
+            //}
             $res = json_decode($res, true);
             if (empty($res['openid'])) {
                 $this->error('登录失败');
@@ -341,6 +346,8 @@ class Wechat
             $redirect = htmlspecialchars_decode($redirect);
             $query = parse_url(strstr($redirect, '?'), PHP_URL_QUERY);
             parse_str($query, $params);
+
+            // $params 是请求是用户时携带的参数
 
             // 获取用户信息
             if ('snsapi_userinfo' == $res['scope']) {
@@ -370,7 +377,10 @@ class Wechat
                 }
 
             } else {
-                exit('仅支持snsapi_userinfo');
+                // 静默授权只有openid
+
+                $openid = $res['openid'];
+                $token = 'abcdefg';
             }
 
             $redirect = $redirect . (strpos($redirect, '?') ? '&' : '?') . 'token=' . $token;
