@@ -357,14 +357,13 @@ class Wechat
                     exit($userinfo['errmsg']);
                 }
                 //    [openid] => ou6NC6kBSloLS94gUhCyKeguIaYI
-                //    [nickname] => fuyelk
+                //    [nickname] => zhangsan
                 //    [sex] => 1 // 1=男，2=女，0=未知
                 //    [language] => zh_CN
                 //    [city] => 郑州
                 //    [province] => 河南
                 //    [country] => 中国
-                //    [headimgurl] => https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKY3E1A2MFK46y1fNv7OElhtQFefO4mrBy8kcQoFCHP9diaULlpeINYB1FJ7KNh4fx5v3rzAJ2LzFg/132
-
+                //    [headimgurl] => https://thirdwx.qlogo.cn/mmopen/vi_32/xxxxxxxxxxx/132
                 $invite_code = $params['sharecode'] ?? '';
 
                 // TODO 业务处理
@@ -378,6 +377,31 @@ class Wechat
 
             } else {
                 // 静默授权只有openid
+
+                try {
+                    // 认证的订阅号在用户有交互的前提下可拉取用户信息
+                    $wechat_url = "https://api.weixin.qq.com/cgi-bin/user/info?openid={$res["openid"]}&lang=zh_CN";
+
+                    $userinfo = $this->wechat->wechatRequest($wechat_url);
+
+                    //  [subscribe] => 1,
+                    //  [openid] => 'ou6NC6lSIiTfHP02QhR7IYMtxdFc',
+                    //  [nickname] => '张三',
+                    //  [sex] => 1,
+                    //  [language] => 'zh_CN',
+                    //  [city] => 'Tonawanda',
+                    //  [province] => 'New York',
+                    //  [country] => 'US',
+                    //  [headimgurl] => 'http://thirdwx.qlogo.cn/mmopen/nParxxxxxxxxxxx/132',
+                    //  [subscribe_time] => 1626677249,
+                    //  [remark] => '',
+                    //  [groupid] => 0,
+                    //  [tagid_list]' => []
+                    //  [subscribe_scene] => 'ADD_SCENE_QR_CODE',
+
+                } catch (\Exception $e) {
+                    $userinfo = [];
+                }
 
                 $openid = $res['openid'];
                 $token = 'abcdefg';
