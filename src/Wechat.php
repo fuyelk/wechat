@@ -73,7 +73,7 @@ class Wechat
                 try {
                     $prefix = Db::getConfig('prefix');
                     $sqlCreateTable = "CREATE TABLE `{$prefix}wechat` (`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',`name` varchar(100) CHARACTER SET utf8mb4 NOT NULL COMMENT '数据名',`value` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '值',`description` text CHARACTER SET utf8mb4 COMMENT '描述',`updatetime` int(10) DEFAULT NULL COMMENT '更新时间',PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='微信配置表';";
-                    $sqlInsertData = "insert into `{$prefix}wechat` (`id`, `name`, `value`, `description`, `updatetime`) values ('1','appid','','APPID',NULL),('2','appsecret','','APP SECRET',NULL),('3','access_token','','SCCESS TOKEN',NULL),('4','access_token_expire_time','','SCCESS TOKEN过期时间',NULL),('5','qrcode','','二维码',NULL);";
+                    $sqlInsertData = "insert into `{$prefix}wechat` (`id`, `name`, `value`, `description`, `updatetime`) values ('1','appid','','APPID',NULL),('2','appsecret','','APP SECRET',NULL),('3','access_token','','ACCESS TOKEN',NULL),('4','access_token_expire_time','','ACCESS TOKEN过期时间',NULL),('5','qrcode','','二维码',NULL);";
                     Db::query($sqlCreateTable);
                     Db::query($sqlInsertData);
                     return Db::name('wechat')->column('value', 'name');
